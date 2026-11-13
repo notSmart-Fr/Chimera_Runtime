@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Mix Format on Save",
+      "trigger": "PostFileSave",
+      "description": "Runs mix format in the chimera_runtime project whenever an .ex or .exs file is saved.",
+      "matcher": "\\.exs?$",
+      "action": {
+        "type": "command",
+        "command": "cmd /c \"cd /d d:\\Chimera_Runtime\\chimera_runtime && mix format\"",
+        "timeout": 60
+      }
+    }
+  ]
+}
