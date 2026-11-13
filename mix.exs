@@ -12,7 +12,8 @@ defmodule ChimeraRuntime.MixProject do
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
       listeners: [Phoenix.CodeReloader],
-      consolidate_protocols: Mix.env() != :dev
+      consolidate_protocols: Mix.env() != :dev,
+      usage_rules: usage_rules()
     ]
   end
 
@@ -41,6 +42,7 @@ defmodule ChimeraRuntime.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:cinder, "~> 0.18"},
       {:sourceror, "~> 1.8", only: [:dev, :test]},
       {:reactor, "~> 1.0"},
       {:ash_state_machine, "~> 0.3"},
@@ -78,7 +80,11 @@ defmodule ChimeraRuntime.MixProject do
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:wasmex, "~> 0.9"},
+      {:stream_data, "~> 1.4"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:usage_rules, "~> 1.0", only: [:dev]}
     ]
   end
 
@@ -102,6 +108,29 @@ defmodule ChimeraRuntime.MixProject do
         "phx.digest"
       ],
       precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
+    ]
+  end
+
+  # Configuration for `mix usage_rules.sync`, targeting Kiro IDE paths
+  defp usage_rules do
+    [
+      file: "AGENTS.md",
+      usage_rules: ["usage_rules:all"],
+      skills: [
+        location: ".kiro/skills",
+        build: [
+          "ash-framework": [
+            description:
+              "Use this skill working with Ash Framework or any of its extensions. Always consult this when making any domain changes, features or fixes.",
+            usage_rules: [:ash, ~r/^ash_/]
+          ],
+          "phoenix-framework": [
+            description:
+              "Use this skill working with Phoenix Framework. Consult this when working with the web layer, controllers, views, liveviews etc.",
+            usage_rules: [:phoenix, ~r/^phoenix_/, :cinder]
+          ]
+        ]
+      ]
     ]
   end
 end
