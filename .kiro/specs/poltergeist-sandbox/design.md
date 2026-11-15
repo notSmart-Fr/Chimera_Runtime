@@ -6,8 +6,8 @@ The Poltergeist Sandbox (Phase 1 of ChimeraRuntime) stores WebAssembly plugins a
 
 Main decisions:
 
-- **Ash domain `ChimeraRuntime.Sandbox`** with exactly two resources, `Plugin` (AshStateMachine, lifecycle `:draft -> :compiling -> :active`, plus `:quarantined`) and `Execution` (AshPaperTrail history). Both use `AshSqlite.DataLayer`.
-- **Ash domain `ChimeraRuntime.Audit`** with exactly one resource, the AshPaperTrail-generated `Execution` Version_Resource. Execution routes its versions here, so the Sandbox registers no Version_Resource (R1.8, R1.9).
+- **Ash domain `ChimeraRuntime.Sandbox`** with exactly three resources: `Plugin` (AshStateMachine, lifecycle `:draft -> :compiling -> :active`, plus `:quarantined`), `Execution` (AshPaperTrail history) and the generated `Execution.Version`. All use `AshSqlite.DataLayer`.
+- **No separate Audit domain.** `ash_paper_trail` 0.8.1 always places the generated `Execution.Version` resource in the source resource's domain, so it is registered in `ChimeraRuntime.Sandbox` (R1.8, R1.9, D4).
 - **Fuel metering plus BEAM deadline.** Every run uses a Wasmex engine with `consume_fuel: true` and a finite fuel budget set on the store before the call, so Wasmtime itself halts runaway code. The BEAM `Task.yield`/`brutal_kill` deadline stays the authoritative backstop (R7.8 to R7.13).
 - **`ChimeraRuntime.Runner.Engine`** is a plain module, not a GenServer. All coordination runs in the Caller process. The Caller validates, gates, consumes the verification one-shot, starts one unlinked Worker, waits with `Task.yield`, kills on timeout, persists the Execution, and returns `{:ok, output} | {:error, reason}`.
 - **Worker** is started with `Task.Supervisor.async_nolink/2` under `ChimeraRuntime.Runner.TaskSupervisor`. This gives monitor-based results, so a Worker crash arrives as `{:exit, reason}` from `Task.yield` and never as a link signal to the Caller.
@@ -40,7 +40,7 @@ flowchart TD
     Worker -->|EngineConfig consume_fuel + set_fuel| Fuel[Wasmtime fuel budget]
     Fuel -->|out of fuel trap| Worker
     Engine -->|create Execution from Caller| Exec[(Execution, Sandbox domain)]
-    Exec -->|PaperTrail versions| Audit[(Version resource, Audit domain)]
+    Exec -->|PaperTrail versions| Audit[(Version resource, Sandbox domain)]
     Engine --> Result["{:ok, output} | {:error, reason}"]
 ```
 
@@ -81,9 +81,9 @@ sequenceDiagram
 
 ### Configuration changes
 
-- `config/config.exs`: add `ash_domains: [ChimeraRuntime.Sandbox, ChimeraRuntime.Audit]` under `config :chimera_runtime`, so both domains resolve at boot (R1.3). Also add `config :ash_paper_trail` only if the pinned version needs it.
+- `config/config.exs`: add `ash_domains: [ChimeraRuntime.Sandbox]` under `config :chimera_runtime`, so the domain resolves at boot (R1.3). Also add `config :ash_paper_trail` only if the pinned version needs it.
 - `lib/chimera_runtime/repo.ex`: switch to `use AshSqlite.Repo`.
-- Migrations are generated with `mix ash.codegen` and applied with `mix ash.migrate` / existing `Ecto.Migrator`. Resource snapshots go to `priv/resource_snapshots`. The generated migrations create three tables: `plugins` and `executions` (Sandbox) and `execution_versions` (Audit), each with a column per persisted attribute (R1.5). A failing migration halts the run and rolls back its own table creation, since each migration runs in a transaction (R1.6).
+- Migrations are generated with `mix ash.codegen` and applied with `mix ash.migrate` / existing `Ecto.Migrator`. Resource snapshots go to `priv/resource_snapshots`. The generated migrations create three tables, all in the Sandbox domain: `plugins`, `executions` and `executions_versions`, each with a column per persisted attribute (R1.5). A failing migration halts the run and rolls back its own table creation, since each migration runs in a transaction (R1.6).
 - Fuel budget: a single application-config value `config :chimera_runtime, ChimeraRuntime.Runner.Engine, fuel_budget: 10_000_000` (finite, positive integer; tests override it with a small value). This is application config, not a dependency change.
 
 ## Components and Interfaces
@@ -92,7 +92,6 @@ sequenceDiagram
 
 ```
 lib/chimera_runtime/sandbox.ex                     # Ash domain
-lib/chimera_runtime/audit.ex                       # Audit domain (Version resource only)
 lib/chimera_runtime/sandbox/plugin.ex              # Plugin resource
 lib/chimera_runtime/sandbox/execution.ex           # Execution resource
 lib/chimera_runtime/sandbox/validations/error_reason_matches_status.ex
@@ -126,25 +125,16 @@ defmodule ChimeraRuntime.Sandbox do
       define :create_execution, action: :create
       define :list_executions, action: :read
     end
+
+    resource ChimeraRuntime.Sandbox.Execution.Version do
+      define :list_execution_versions, action: :read
+    end
   end
 end
 ```
 
-Exactly two resources are registered (Requirement 1.2). The Sandbox lists no Version_Resource.
+Exactly three resources are registered (Requirements 1.2, 1.8): Plugin, Execution, and the AshPaperTrail-generated `ChimeraRuntime.Sandbox.Execution.Version`. `ash_paper_trail` 0.8.1 always places the Version resource in its source resource's domain, so there is no separate Audit domain (R1.9, D4). Version rows are read through the `list_execution_versions` code interface.
 
-### Audit domain
-
-```elixir
-defmodule ChimeraRuntime.Audit do
-  use Ash.Domain
-
-  resources do
-    resource ChimeraRuntime.Sandbox.Execution.Version
-  end
-end
-```
-
-Exactly one resource is registered, the AshPaperTrail-generated Version_Resource for Execution (R1.8). Execution declares the routing in its `paper_trail` block with `domain ChimeraRuntime.Audit` (AshPaperTrail's version-domain option), so the generated version module belongs to Audit and not Sandbox (R1.9). The option name is confirmed against the pinned `ash_paper_trail` source before implementation; if the pinned version names it differently, the same routing is achieved with that version's equivalent option. Version rows are read through Audit, for example by `Ash.read(ChimeraRuntime.Audit... )` or a code interface defined on the Audit domain.
 
 ### Plugin resource
 
@@ -215,7 +205,7 @@ Failure atomicity (3.8): Ash runs actions in a transaction, and `transaction_rol
 ### Execution resource
 
 - Data layer: `AshSqlite.DataLayer`, table `"executions"`.
-- Extension: `AshPaperTrail.Resource` with `change_tracking_mode :changes_only`, `store_action_name? true`. PaperTrail generates a `ChimeraRuntime.Sandbox.Execution.Version` resource, which is routed into the `ChimeraRuntime.Audit` domain so the Sandbox keeps exactly two resources (see Audit domain and Decision D4).
+- Extension: `AshPaperTrail.Resource` with `change_tracking_mode :changes_only`, `store_action_name? true`. PaperTrail generates a `ChimeraRuntime.Sandbox.Execution.Version` resource in the same (Sandbox) domain (see Decision D4).
 
 Attributes:
 
@@ -433,16 +423,16 @@ Persistence is performed in the Caller, and a Worker has no reference to the Rep
 | run_mode | text | no | default `standard` |
 | inserted_at / updated_at | utc_datetime_usec | no | |
 
-### execution_versions (Audit domain)
+### executions_versions (Sandbox domain)
 
-AshPaperTrail adds an `execution_versions` table owned by the `ChimeraRuntime.Audit` domain (version id, `version_source_id`, `changes` map, `version_action_name`, `version_action_type`, timestamps).
+AshPaperTrail adds an `executions_versions` table owned by the `ChimeraRuntime.Sandbox` domain (version id, `version_source_id`, `changes` map, `version_action_name`, `version_action_type`, timestamps).
 
 ### Decisions and rationale
 
 - **D1: Engine as module, not GenServer.** The Caller owns persistence and the one-shot marker, which the requirements demand (8.11, 9.4). A GenServer would serialize runs and add a failure point.
 - **D2: `async_nolink` plus `yield`/`shutdown`.** Provides unlinked processes with mailbox cleanup, and handles the shutdown race (7.7) in one code path.
 - **D3: Derived `failure_rate` as a calculation over aggregates.** It stays consistent with executions on every read (5.8) without write-time bookkeeping.
-- **D4: PaperTrail version resource lives in the `ChimeraRuntime.Audit` domain. RESOLVED.** Requirements 1.2, 1.8 and 1.9 settle the earlier open point: Sandbox registers only Plugin and Execution, Audit registers only the Version_Resource, and both domains are in `:ash_domains`. No `History` domain and no ambiguity remain.
+- **D4: PaperTrail version resource lives in the `ChimeraRuntime.Sandbox` domain. REVISED.** `ash_paper_trail` 0.8.1 has no option to route the generated Version resource to another domain; it always uses the source resource's domain. The earlier plan for a separate `ChimeraRuntime.Audit` domain was dropped. Sandbox registers Plugin, Execution and `Execution.Version`, and only Sandbox is in `:ash_domains`.
 - **D7: Fuel metering with the BEAM deadline as backstop.** Fuel stops runaway Wasm inside Wasmtime so no native thread keeps spinning; the deadline still covers wall-clock limits. Fuel exhaustion is recorded as `:timeout`, since it is a resource-limit stop rather than a module bug.
 - **D5: Verification is consumed before the Worker starts**, so a crash, timeout, or Engine failure cannot re-arm it (8.11, 8.13).
 - **D6: Repo conversion to `AshSqlite.Repo`** is required by the data layer and is the only existing non-`mix.exs` file whose behavior changes.
@@ -591,7 +581,7 @@ Dual approach: property tests for the Engine, gate, validations, and aggregates;
 - Valid module `add(i32, i32) -> i32` (WAT compiled to bytes in `test/support/wasm_fixtures.ex`) returns `{:ok, [expected]}` (11.11). Wasm text compilation must not add a dependency: fixtures are checked-in byte literals (hand-assembled binaries), not generated from WAT at test time.
 - Fuel exhaustion (R11.17): with the fuel budget overridden to a small value, the `infinite_loop` fixture returns `{:error, {:fuel_exhausted, _}}` quickly (well before the deadline) and creates one Execution with status `:timeout`. This test also pins the real Wasmtime out-of-fuel message used by the matcher.
 - Finite fuel (R11.18): after a run, the store's `StoreOrCaller.get_fuel/1` is finite and at most the configured budget. Implemented through a test seam that exposes the store built by the Worker (for example by calling `Worker.build_store/0` directly).
-- Audit domain (R11.19): `ChimeraRuntime.Sandbox.Execution.Version` is in `Ash.Domain.Info.resources(ChimeraRuntime.Audit)`, the Sandbox resource list contains only Plugin and Execution, and creating one Execution creates exactly one Version row.
+- Domain registration (R11.19): `ChimeraRuntime.Sandbox.Execution.Version` is in `Ash.Domain.Info.resources(ChimeraRuntime.Sandbox)` alongside Plugin and Execution, `ChimeraRuntime.Audit` is not defined, and creating one Execution creates exactly one Version row.
 - Follow-up run (R11.16) is asserted inside Property 3, not as a separate example.
 - Fixtures: `add`, `infinite_loop`, `trap_unreachable`, `divide_by_zero`, `module_with_import`, and `no_results`.
 - Missing export, trap, and unsatisfied import examples (8.3, 8.4, 6.9).
@@ -604,8 +594,8 @@ Dual approach: property tests for the Engine, gate, validations, and aggregates;
 
 ### Smoke and integration tests
 
-- Application boots with `ChimeraRuntime.Sandbox` and `ChimeraRuntime.Audit` both in `:ash_domains` and the TaskSupervisor registered (1.3, 6.3).
-- Migrations run against an empty database and create the plugins, executions, and execution_versions tables with a column per persisted attribute (1.5); a record survives a Repo restart (1.7).
+- Application boots with `ChimeraRuntime.Sandbox` in `:ash_domains` and the TaskSupervisor registered (1.3, 6.3).
+- Migrations run against an empty database and create the plugins, executions, and executions_versions tables with a column per persisted attribute (1.5); a record survives a Repo restart (1.7).
 - Engine source uses `wasi: false` and an empty import map (6.7, 6.8). Asserted by an example test where a module declaring any import fails instantiation.
 - `mix.exs` guard: before implementation edits, a check that only `ash_sqlite` and `ash_paper_trail` were added, with `"== x.y.z"` pins and all other entries unchanged (12.x). This is a process check, not an automated test.
 

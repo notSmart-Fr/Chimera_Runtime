@@ -14,6 +14,9 @@ config :chimera_runtime, ChimeraRuntime.Repo,
   pool_size: 5,
   pool: Ecto.Adapters.SQL.Sandbox
 
+# Smaller fuel budget so runaway-loop tests finish quickly
+config :chimera_runtime, ChimeraRuntime.Runner.Engine, fuel_budget: 100_000
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :chimera_runtime, ChimeraRuntimeWeb.Endpoint,

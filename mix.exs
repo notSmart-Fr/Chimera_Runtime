@@ -47,6 +47,8 @@ defmodule ChimeraRuntime.MixProject do
       {:reactor, "~> 1.0"},
       {:ash_state_machine, "~> 0.3"},
       {:ash, "~> 3.0"},
+      {:ash_sqlite, "== 0.3.1"},
+      {:ash_paper_trail, "== 0.8.1"},
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:phoenix, "~> 1.8.16"},
       {:phoenix_ecto, "~> 4.5"},

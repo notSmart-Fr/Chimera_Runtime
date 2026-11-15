@@ -55,7 +55,11 @@ config :spark,
 
 config :chimera_runtime,
   ecto_repos: [ChimeraRuntime.Repo],
+  ash_domains: [ChimeraRuntime.Sandbox],
   generators: [timestamp_type: :utc_datetime]
+
+# Wasm execution fuel budget for the sandbox runner
+config :chimera_runtime, ChimeraRuntime.Runner.Engine, fuel_budget: 10_000_000
 
 # Configure the endpoint
 config :chimera_runtime, ChimeraRuntimeWeb.Endpoint,

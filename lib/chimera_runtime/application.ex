@@ -10,6 +10,7 @@ defmodule ChimeraRuntime.Application do
     children = [
       ChimeraRuntimeWeb.Telemetry,
       ChimeraRuntime.Repo,
+      {Task.Supervisor, name: ChimeraRuntime.Runner.TaskSupervisor},
       {Ecto.Migrator,
        repos: Application.fetch_env!(:chimera_runtime, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:chimera_runtime, :dns_cluster_query) || :ignore},

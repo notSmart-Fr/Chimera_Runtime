@@ -31,7 +31,7 @@ metadata:
 ## Searching Documentation
 
 ```sh
-mix usage_rules.search_docs "search term" -p ash -p ash_state_machine
+mix usage_rules.search_docs "search term" -p ash -p ash_paper_trail -p ash_sqlite -p ash_state_machine
 ```
 
 ## Available Mix Tasks
@@ -63,6 +63,12 @@ mix usage_rules.search_docs "search term" -p ash -p ash_state_machine
 - `mix ash.signals` - Prints the signals of your application, and what emits and listens to them
 - `mix ash.tear_down` - Runs all tear_down tasks for any extension on any resource/domain in your application.
 - `mix compile.ash_signals`
+- `mix ash_sqlite.create` - Creates the repository storage
+- `mix ash_sqlite.drop` - Drops the repository storage for the repos in the specified (or configured) domains
+- `mix ash_sqlite.generate_migrations` - Generates migrations, and stores a snapshot of your resources
+- `mix ash_sqlite.install` - Installs AshSqlite. Should be run with `mix igniter.install ash_sqlite`
+- `mix ash_sqlite.migrate` - Runs the repository migrations for all repositories in the provided (or configured) domains
+- `mix ash_sqlite.rollback` - Rolls back the repository migrations for all repositories in the provided (or configured) domains
 - `mix ash_state_machine.generate_flow_charts` - Generates Mermaid Flow Charts for each resource using `AshStateMachine`
 - `mix ash_state_machine.install` - Installs AshStateMachine
 <!-- usage-rules-skill-end -->
