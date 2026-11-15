@@ -28,10 +28,14 @@ metadata:
 - [temporal](references/ash/temporal.md)
 - [testing](references/ash/testing.md)
 
+### ash_ai
+
+- [ash_ai](references/ash_ai/ash_ai.md)
+
 ## Searching Documentation
 
 ```sh
-mix usage_rules.search_docs "search term" -p ash -p ash_paper_trail -p ash_sqlite -p ash_state_machine
+mix usage_rules.search_docs "search term" -p ash -p ash_ai -p ash_paper_trail -p ash_sqlite -p ash_state_machine
 ```
 
 ## Available Mix Tasks
@@ -63,6 +67,10 @@ mix usage_rules.search_docs "search term" -p ash -p ash_paper_trail -p ash_sqlit
 - `mix ash.signals` - Prints the signals of your application, and what emits and listens to them
 - `mix ash.tear_down` - Runs all tear_down tasks for any extension on any resource/domain in your application.
 - `mix compile.ash_signals`
+- `mix ash_ai.gen.chat` - Generates the resources and views for a conversational UI backed by `ash_postgres` and `ash_oban`
+- `mix ash_ai.gen.mcp` - Sets up an MCP server for your application
+- `mix ash_ai.gen.mcp_oauth` - Generates encrypted storage and routes for connecting to MCP servers that use OAuth
+- `mix ash_ai.install` - Installs `AshAi`. Call with `mix igniter.install ash_ai`. Requires igniter to run.
 - `mix ash_sqlite.create` - Creates the repository storage
 - `mix ash_sqlite.drop` - Drops the repository storage for the repos in the specified (or configured) domains
 - `mix ash_sqlite.generate_migrations` - Generates migrations, and stores a snapshot of your resources

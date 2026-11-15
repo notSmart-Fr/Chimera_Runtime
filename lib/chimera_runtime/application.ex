@@ -15,6 +15,7 @@ defmodule ChimeraRuntime.Application do
        repos: Application.fetch_env!(:chimera_runtime, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:chimera_runtime, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ChimeraRuntime.PubSub},
+      ChimeraRuntime.Chaos.Gate,
       # Start a worker by calling: ChimeraRuntime.Worker.start_link(arg)
       # {ChimeraRuntime.Worker, arg},
       # Start to serve requests, typically the last entry

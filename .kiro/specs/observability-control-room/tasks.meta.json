@@ -1,0 +1,666 @@
+{
+  "pbtResults": {
+    "7.5 Write property test for `publish/3` totality": {
+      "status": "passed",
+      "lastRunTimestamp": 1794733504473
+    },
+    "7.4 Write property test for saga outcome invariants": {
+      "status": "passed",
+      "lastRunTimestamp": 1794733508739
+    },
+    "9.6 Write property test for the body size decision": {
+      "status": "passed",
+      "lastRunTimestamp": 1794733606401
+    },
+    "9.5 Write property test for the MCP_Guard decision": {
+      "status": "passed",
+      "lastRunTimestamp": 1794733620418
+    }
+  },
+  "executionHistory": {
+    "1.1 Add `ash_ai` with an exact pin and record the lockfile diff": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719861608
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719873684
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719964938
+      }
+    ],
+    "1.2 Re-verify the `ash_ai` API facts against the pinned source": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719861715
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719975232
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720180962
+      }
+    ],
+    "1.3 Sync usage rules": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719861769
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719975410
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720181454
+      }
+    ],
+    "2.1 Add configuration keys and the busy timeout": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719861830
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719975539
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720182007
+      }
+    ],
+    "3.1 Implement `ChimeraRuntimeWeb.ControlRoom.ArgsCodec`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719861884
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719975663
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720182926
+      }
+    ],
+    "3.4 Implement `ChimeraRuntimeWeb.ControlRoom.Format`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719861943
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719975807
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720183315
+      }
+    ],
+    "4.1 Implement `ChimeraRuntime.RunGuard`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862000
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720254595
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720323562
+      }
+    ],
+    "4.3 Implement `ChimeraRuntime.Chaos.Gate` and supervise it": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862061
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720254763
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720324204
+      }
+    ],
+    "4.5 Implement `ChimeraRuntimeWeb.ControlRoom.Refresh`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862136
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720203760
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720248561
+      }
+    ],
+    "4.7 Implement `ChimeraRuntime.Vitals`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862219
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720254900
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720324668
+      }
+    ],
+    "5.1 Implement `ChimeraRuntime.Sandbox.EventPayload`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862282
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720203913
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720248246
+      }
+    ],
+    "5.4 Add the `Ash.Notifier.PubSub` notifier to Execution and Plugin": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862377
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720331327
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720451670
+      }
+    ],
+    "6.1 Implement `ChimeraRuntime.Chaos.Plugin`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862434
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720331455
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720452506
+      }
+    ],
+    "7.1 Implement `StageError` and `Result`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862497
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720331623
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720452825
+      }
+    ],
+    "7.2 Implement the four `Reactor.Step` modules": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862567
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720457437
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720574627
+      }
+    ],
+    "7.3 Implement `PublishPluginReactor` and `publish/3`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862631
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720579612
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720717712
+      }
+    ],
+    "8.1 Add the route and the `:control_room_access` pipeline": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862686
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720723174
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720871776
+      }
+    ],
+    "8.2 Implement `ChimeraRuntimeWeb.ControlRoomComponents`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862742
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720458187
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720574110
+      }
+    ],
+    "8.3 Implement `ChimeraRuntimeWeb.DashboardLive`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862795
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720580408
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720718976
+      }
+    ],
+    "9.1 Implement the `WasmNumber` Ash type and spike the schema": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862849
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720458739
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720575470
+      }
+    ],
+    "9.2 Add the generic action `:run` to Plugin with `Plugin.Run`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862907
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720580892
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720718546
+      }
+    ],
+    "9.3 Add the `AshAi` extension and `tools` section to the Sandbox_Domain": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719862961
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720723871
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720870818
+      }
+    ],
+    "9.4 Implement `McpGuard` and `McpLimits`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719863017
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720459287
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720575843
+      }
+    ],
+    "9.7 Mount the MCP server in the router": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719863076
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720875898
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721001061
+      }
+    ],
+    "10.1 Verify Phase 1 contracts are intact": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719863132
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721005820
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721078909
+      }
+    ],
+    "11. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719863195
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721392810
+      }
+    ],
+    "12.1 Run `mix precommit`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719863247
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721084753
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721343380
+      }
+    ],
+    "12.2 Confirm the dependency diff": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794719863297
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721347638
+      },
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721387404
+      }
+    ],
+    "1. Dependency preflight for `ash_ai`": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720181507
+      }
+    ],
+    "2. Configuration and SQLite safeguards": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720182075
+      }
+    ],
+    "3. Pure helpers: argument codec and formatters": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720183425
+      }
+    ],
+    "4. Run safeguards, coalescing, and vitals": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720324787
+      }
+    ],
+    "5. Event contract and PubSub notifiers": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720451752
+      }
+    ],
+    "6. Chaos_Plugin": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720452606
+      }
+    ],
+    "7. Publish saga": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720717786
+      }
+    ],
+    "8. Control_Room LiveView": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794720871831
+      }
+    ],
+    "9. MCP server": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721001141
+      }
+    ],
+    "10. Phase 1 contract preservation": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721078999
+      }
+    ],
+    "12. Final quality gate": [
+      {
+        "executionId": "7d395483-86c2-4460-bae7-4cb11fd513af",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794721387490
+      }
+    ],
+    "7.4 Write property test for saga outcome invariants": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733460279
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733572305
+      }
+    ],
+    "7.5 Write property test for `publish/3` totality": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733460472
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733573154
+      }
+    ],
+    "7.6 Write example saga tests with real Wasm fixtures": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733460703
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733573905
+      }
+    ],
+    "7.7 Write the failing-compensation test": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733460857
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733574451
+      }
+    ],
+    "8.4 Write LiveView tests": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733461409
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733575266
+      }
+    ],
+    "9.5 Write property test for the MCP_Guard decision": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733576054
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733819243
+      }
+    ],
+    "9.6 Write property test for the body size decision": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733576612
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733820047
+      }
+    ],
+    "9.8 Write MCP request tests": [
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733577238
+      },
+      {
+        "executionId": "294e2bf0-ef2b-4024-884e-ffb556ad68b8",
+        "chatSessionId": "sess_125457bf-22da-4ca2-8604-e451d76f2a28",
+        "timestamp": 1794733818442
+      }
+    ]
+  }
+}

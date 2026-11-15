@@ -61,6 +61,23 @@ config :chimera_runtime,
 # Wasm execution fuel budget for the sandbox runner
 config :chimera_runtime, ChimeraRuntime.Runner.Engine, fuel_budget: 10_000_000
 
+# Soft cap on concurrently running Workers
+config :chimera_runtime, ChimeraRuntime.RunGuard, max_workers: 8
+
+# Chaos chamber limits
+config :chimera_runtime, :chaos, deadline_ms: 250, cooldown_ms: 2000
+
+# MCP endpoint guard (loopback without token is enabled only in dev and test)
+config :chimera_runtime, :mcp,
+  allow_loopback_without_token?: false,
+  allowed_origins: [],
+  mcp_max_timeout_ms: 30_000
+
+# Publish saga hooks, read at run time
+config :chimera_runtime, ChimeraRuntime.Orchestration,
+  verification_runner: &ChimeraRuntime.Runner.Engine.run/4,
+  quarantine_fun: &ChimeraRuntime.Sandbox.quarantine_plugin/1
+
 # Configure the endpoint
 config :chimera_runtime, ChimeraRuntimeWeb.Endpoint,
   url: [host: "localhost"],

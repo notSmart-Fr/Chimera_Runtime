@@ -17,6 +17,9 @@ config :chimera_runtime, ChimeraRuntime.Repo,
 # Smaller fuel budget so runaway-loop tests finish quickly
 config :chimera_runtime, ChimeraRuntime.Runner.Engine, fuel_budget: 100_000
 
+# Allow MCP from loopback without a token in tests
+config :chimera_runtime, :mcp, allow_loopback_without_token?: true
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :chimera_runtime, ChimeraRuntimeWeb.Endpoint,

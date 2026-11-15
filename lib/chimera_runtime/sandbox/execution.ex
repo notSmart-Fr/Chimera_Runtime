@@ -7,7 +7,8 @@ defmodule ChimeraRuntime.Sandbox.Execution do
   use Ash.Resource,
     domain: ChimeraRuntime.Sandbox,
     data_layer: AshSqlite.DataLayer,
-    extensions: [AshPaperTrail.Resource]
+    extensions: [AshPaperTrail.Resource],
+    notifiers: [Ash.Notifier.PubSub]
 
   sqlite do
     table "executions"
@@ -53,6 +54,15 @@ defmodule ChimeraRuntime.Sandbox.Execution do
         :run_mode
       ]
     end
+  end
+
+  pub_sub do
+    module ChimeraRuntimeWeb.Endpoint
+    prefix "sandbox"
+
+    publish :create, "executions",
+      event: "execution_recorded",
+      transform: &ChimeraRuntime.Sandbox.EventPayload.execution/1
   end
 
   validations do

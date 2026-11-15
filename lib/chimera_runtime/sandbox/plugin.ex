@@ -9,7 +9,8 @@ defmodule ChimeraRuntime.Sandbox.Plugin do
   use Ash.Resource,
     domain: ChimeraRuntime.Sandbox,
     data_layer: AshSqlite.DataLayer,
-    extensions: [AshStateMachine]
+    extensions: [AshStateMachine],
+    notifiers: [Ash.Notifier.PubSub]
 
   sqlite do
     table "plugins"
@@ -88,6 +89,48 @@ defmodule ChimeraRuntime.Sandbox.Plugin do
       change filter(expr(verification_used == false))
       change atomic_update(:verification_used, true)
     end
+
+    action :run, :map do
+      description "Run an active plugin function through the Engine (standard mode)."
+
+      argument :id, :uuid, allow_nil?: false
+
+      argument :function_name, :string,
+        allow_nil?: false,
+        constraints: [min_length: 1, max_length: 255, allow_empty?: false]
+
+      argument :args, {:array, ChimeraRuntime.Sandbox.Types.WasmNumber},
+        allow_nil?: false,
+        default: [],
+        constraints: [min_length: 0, max_length: 64]
+
+      run ChimeraRuntime.Sandbox.Plugin.Run
+    end
+  end
+
+  pub_sub do
+    module ChimeraRuntimeWeb.Endpoint
+    prefix "sandbox"
+
+    publish :create, "plugins",
+      event: "plugin_changed",
+      transform: &ChimeraRuntime.Sandbox.EventPayload.plugin/1
+
+    publish :update, "plugins",
+      event: "plugin_changed",
+      transform: &ChimeraRuntime.Sandbox.EventPayload.plugin/1
+
+    publish :compile, "plugins",
+      event: "plugin_changed",
+      transform: &ChimeraRuntime.Sandbox.EventPayload.plugin/1
+
+    publish :activate, "plugins",
+      event: "plugin_changed",
+      transform: &ChimeraRuntime.Sandbox.EventPayload.plugin/1
+
+    publish :quarantine, "plugins",
+      event: "plugin_changed",
+      transform: &ChimeraRuntime.Sandbox.EventPayload.plugin/1
   end
 
   attributes do

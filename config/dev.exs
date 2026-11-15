@@ -8,6 +8,7 @@ config :ash,
 config :chimera_runtime, ChimeraRuntime.Repo,
   database: Path.expand("../chimera_runtime_dev.db", __DIR__),
   pool_size: 5,
+  busy_timeout: 5000,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true
 
@@ -52,6 +53,9 @@ config :chimera_runtime, ChimeraRuntimeWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
+
+# Allow MCP from loopback without a token in development
+config :chimera_runtime, :mcp, allow_loopback_without_token?: true
 
 # Enable dev routes for dashboard and mailbox
 config :chimera_runtime, dev_routes: true

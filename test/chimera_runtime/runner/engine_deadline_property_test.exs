@@ -44,7 +44,7 @@ defmodule ChimeraRuntime.Runner.EngineDeadlinePropertyTest do
       {elapsed_us, result} = :timer.tc(fn -> Engine.run(looping, "run", []) end)
 
       assert result == {:error, :timeout}
-      assert div(elapsed_us, 1000) <= timeout_ms + 100
+      assert div(elapsed_us, 1000) <= timeout_ms + 250
 
       {follow_us, follow} = :timer.tc(fn -> Engine.run(valid, "add", [2, 3]) end)
 

@@ -23,6 +23,16 @@ end
 config :chimera_runtime, ChimeraRuntimeWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+if config_env() != :prod do
+  case System.get_env("CHIMERA_MCP_TOKEN") do
+    token when is_binary(token) and token != "" ->
+      config :chimera_runtime, :mcp, token: token
+
+    _ ->
+      :ok
+  end
+end
+
 if config_env() == :dev do
   # Reload browser tabs when matching files change.
   config :chimera_runtime, ChimeraRuntimeWeb.Endpoint,
@@ -50,7 +60,19 @@ if config_env() == :prod do
 
   config :chimera_runtime, ChimeraRuntime.Repo,
     database: database_path,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "5")
+    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "5"),
+    busy_timeout: 5000
+
+  mcp_token = System.get_env("CHIMERA_MCP_TOKEN")
+
+  if is_nil(mcp_token) or byte_size(mcp_token) < 32 do
+    raise """
+    environment variable CHIMERA_MCP_TOKEN is missing or shorter than 32 bytes.
+    Generate one with: mix phx.gen.secret
+    """
+  end
+
+  config :chimera_runtime, :mcp, token: mcp_token
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
