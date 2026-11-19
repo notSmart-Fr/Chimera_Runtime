@@ -230,29 +230,29 @@ defmodule ChimeraRuntimeWeb.ControlRoomComponents do
           <span :if={@stale?} id="vitals-stale" class="badge badge-warning badge-sm">stale</span>
         </h2>
 
-        <div id="vitals-cards" class="grid grid-cols-2 gap-3 md:grid-cols-4">
-          <.vital_card id="vital-workers" label="Active workers" value={@vitals[:active_workers]} />
+        <div id="vitals-cards" class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          <.vital_card id="vital-workers" label="Active Workers" value={@vitals[:active_workers]} />
           <.vital_card
             id="vital-schedulers"
-            label="Schedulers online"
+            label="Schedulers"
             value={@vitals[:schedulers_online]}
           />
           <.vital_card
             id="vital-dirty"
-            label="Dirty CPU schedulers"
+            label="Dirty CPU"
             value={@vitals[:dirty_cpu_schedulers_online]}
           />
-          <.vital_card id="vital-runq" label="Run queue" value={@vitals[:run_queue]} />
+          <.vital_card id="vital-runq" label="Run Queue" value={@vitals[:run_queue]} />
           <.vital_card id="vital-procs" label="Processes" value={@vitals[:process_count]} />
           <.vital_card
             id="vital-util"
-            label="Scheduler utilization"
+            label="Utilization"
             value={utilization(@vitals[:utilization_percent])}
           />
           <.vital_card
             :for={key <- [:total, :processes, :binary, :ets, :code]}
             id={"vital-mem-#{key}"}
-            label={"Memory #{key}"}
+            label={memory_label(key)}
             value={memory(@vitals[:memory], key)}
           />
         </div>
@@ -282,6 +282,11 @@ defmodule ChimeraRuntimeWeb.ControlRoomComponents do
     """
   end
 
+  defp memory_label(:total), do: "Total Mem"
+  defp memory_label(:processes), do: "Process Mem"
+  defp memory_label(:binary), do: "Binary Mem"
+  defp memory_label(:ets), do: "ETS Mem"
+  defp memory_label(:code), do: "Code Mem"
   attr :id, :string, required: true
   attr :label, :string, required: true
   attr :value, :any, default: nil
@@ -292,8 +297,10 @@ defmodule ChimeraRuntimeWeb.ControlRoomComponents do
       id={@id}
       class="rounded-box border border-base-300 bg-base-200/40 p-3 transition-colors hover:bg-base-200"
     >
-      <div class="text-xs uppercase tracking-wide text-base-content/60">{@label}</div>
-      <div class="mt-1 text-lg font-semibold tabular-nums">{@value || "n/a"}</div>
+      <div class="whitespace-nowrap text-xs uppercase tracking-wide text-base-content/60">
+        {@label}
+      </div>
+      <div class="mt-1 whitespace-nowrap text-lg font-semibold tabular-nums">{@value || "n/a"}</div>
     </div>
     """
   end

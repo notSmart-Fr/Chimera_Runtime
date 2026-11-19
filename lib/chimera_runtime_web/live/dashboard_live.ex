@@ -77,7 +77,7 @@ defmodule ChimeraRuntimeWeb.DashboardLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash}>
-      <div class="mx-auto w-full max-w-6xl space-y-6 px-2 py-6">
+      <div class="mx-auto w-full max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <.demo_banner />
         <.registry_panel registry_query={@registry_query} />
         <div class="grid gap-6 lg:grid-cols-2">
